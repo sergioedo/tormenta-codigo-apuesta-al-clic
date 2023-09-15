@@ -24,7 +24,7 @@ export default function Home() {
       </div>
 
       {/* <!-- Botón rojo grande y redondo --> */}
-      <button className="red-button" onClick={() => setClics(clics + 1)}>Clic</button>
+      <button className="red-button" onClick={() => setClics((clics + 1) % 11)}>Clic</button>
 
       <hr />
 
