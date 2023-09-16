@@ -1,5 +1,6 @@
 'use server'
 import { session } from './session';
+import { redirect } from 'next/navigation';
 
 export async function apuesta(formData) {
     // Read current random value from session
@@ -12,8 +13,9 @@ export async function apuesta(formData) {
     const randomValue = await session().get('random_value');
 
     const clics = parseInt(formData.get('clics'));
+    const success = randomValue === clics;
 
-    console.log({ randomValue, clics });
+    if (success) redirect(`/winner`);
 
-    return { success: randomValue === clics };
+    return { success };
 }
