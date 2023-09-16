@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { reset } from '../actions';
+import { notFound } from 'next/navigation';
 
 export default function Winner() {
+
     return (
         <>
             <div className="result-container">
