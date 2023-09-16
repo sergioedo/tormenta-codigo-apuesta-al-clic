@@ -21,4 +21,14 @@ export const getUserRandomValue = async () => {
 
 export const resetUser = async () => {
     await session().destroy('random_value');
+    await session().destroy('winner');
+}
+
+export const isWinnerUser = async () => {
+    const isWinner = await session().get('winner');
+    return isWinner;
+}
+
+export const setWinnerUser = async (value = false) => {
+    await session().set('winner', value);
 }

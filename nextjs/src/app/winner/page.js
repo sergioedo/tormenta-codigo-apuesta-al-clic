@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { reset } from '../actions';
+import { isWinnerUser } from '../session';
 import { notFound } from 'next/navigation';
 
-export default function Winner() {
-
+export default async function Winner() {
+    const isWinner = await isWinnerUser();
+    if (!isWinner) notFound();
     return (
         <>
             <div className="result-container">
