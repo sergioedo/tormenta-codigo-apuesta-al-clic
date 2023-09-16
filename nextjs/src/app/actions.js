@@ -19,3 +19,8 @@ export async function apuesta(formData) {
 
     return { success };
 }
+
+export async function reset(formData) {
+    await session().destroy('random_value');
+    redirect(`/`);
+}

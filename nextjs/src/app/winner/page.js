@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import Link from 'next/link';
+import { reset } from '../actions';
 
 export default function Winner() {
     return (
@@ -14,7 +15,9 @@ export default function Winner() {
                     allowfullscreen
                 ></iframe>
             </div>
-            <Link className="bet-button" href="/">🎲 Volver a Jugar 🎲</Link>
+            <form action={reset}>
+                <button className="bet-button" type="submit">🎲 Volver a Jugar 🎲</button>
+            </form>
         </>
     )
 }
