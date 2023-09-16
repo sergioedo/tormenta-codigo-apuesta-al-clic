@@ -2,7 +2,6 @@
 
 // import Image from 'next/image'
 import { useState } from 'react'
-import styles from './page.module.css'
 import { apuesta } from './actions'
 
 export default function Home() {
