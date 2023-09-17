@@ -64,55 +64,60 @@
       .result-container {
         margin: 10px;
       }
+
+      /* Para que el input number se vea como el contador inicial */
+      #counter::-webkit-inner-spin-button,
+      #counter::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      #counter {
+        -moz-appearance: textfield;
+        appearance: textfield;
+        border: 0;
+        font-size: 24px;
+      }
+
+      #counter:focus {
+        outline: 0;
+      }
     </style>
   </head>
   <body>
     <h1>Apuesta al clic</h1>
 
     <!-- Contador de clics -->
-    <div class="counter">Clics: <span id="counter">0</span></div>
+    <form id="form" hx-trigger="submit" hx-target="#result">
+      <div class="counter">
+        Clics:
+        <input
+          id="counter"
+          name="clics"
+          type="number"
+          min="0"
+          max="10"
+          step="1"
+          value="0"
+        />
+      </div>
 
-    <!-- Botón rojo grande y redondo -->
-    <button
-      class="red-button"
-      _="on click set #counter.innerHTML to (Number(#counter.innerHTML) + 1) mod 11"
-    >
-      Clic
-    </button>
+      <!-- Botón rojo grande y redondo -->
+      <button
+        class="red-button"
+        _="on click set #counter.value to (Number(#counter.value) + 1) mod 11"
+      >
+        Clic
+      </button>
 
-    <hr />
+      <hr />
 
-    <!-- Botón para hacer la apuesta con emojis -->
-    <button
-      class="bet-button"
-      _="on click if Number(#counter.innerHTML) != (Number(#form.innerHTML) - 1) then set #result-gif.src to 'https://giphy.com/embed/5aYiXtUDSHbFBoScRP' else set #result-gif.src to 'https://giphy.com/embed/3o72FeJnjfZZ31WjBu' end"
-    >
-      🎲 Apuesta 🎲
-    </button>
-
-    <form
-      id="form"
-      hx-post="https://randommer.io/Number"
-      hx-trigger="load"
-      style="display: none"
-      _="on htmx:afterSwap log Number(my innerHTML)"
-    >
-      <input type="hidden" name="LowerRange" value="1" />
-      <input type="hidden" name="HigherRange" value="11" />
-      <input type="hidden" name="range" value="range" />
-      <input type="hidden" name="X-Requested-With" value="XMLHttpRequest" />
+      <div id="result">
+        <!-- Botón para hacer la apuesta con emojis -->
+        <button class="bet-button" hx-post="/apuesta" type="submit">
+          🎲 Apuesta 🎲
+        </button>
+      </div>
     </form>
-
-    <div class="result-container">
-      <iframe
-        id="result-gif"
-        src=""
-        width="480"
-        height="304"
-        frameborder="0"
-        class="giphy-embed"
-        allowfullscreen
-      ></iframe>
-    </div>
   </body>
 </html>
