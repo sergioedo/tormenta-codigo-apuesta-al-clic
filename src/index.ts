@@ -73,4 +73,4 @@ const app = new Elysia()
       '<button class="bet-button" type="submit" hx-post="/apuesta">🎲 Apuesta 🎲</button>'
     );
   })
-  .listen(3000);
+  .listen(Bun.env.PORT || 3000);
